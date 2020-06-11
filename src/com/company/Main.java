@@ -1,5 +1,7 @@
 package com.company;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Scanner;
 
 public class Main {
@@ -20,10 +22,9 @@ public class Main {
                     "1)Add an item\n" +
                     "2)Update an item's quantity\n" +
                     "3)Delete an item\n" +
-                    "4)Get item contents\n" +
-                    "5)Clear grocery list\n" +
-                    "6)See current list\n" +
-                    "7)Quit and see summary");
+                    "4)Clear grocery list\n" +
+                    "5)See current list\n" +
+                    "6)Quit and see summary");
             switch (scan.nextInt()) {
                 //enhanced for syntax using lambda ->
                 case 1 -> {
@@ -36,18 +37,28 @@ public class Main {
                     String item = scan.nextLine();
                     groceryList.updateItem(item);
                 }
-                case 6 ->{
+                case 3 -> {
+                    scan.nextLine();
+                    System.out.println("Enter the item you wish to delete:");
+                    String itm = scan.nextLine();
+                    groceryList.deleteItem(itm);
+                }
+                case 4 -> {
+                    groceryList.clearAll();
+                }
+                case 5 ->{
                     groceryList.getList();
                 }
-                case 7 -> cont = false;
-                default -> System.out.println("Please only enter 1-7");
+                case 6 -> cont = false;
+                default -> System.out.println("Please only enter 1-6");
             }
         }
         System.out.println("Thank you");
 
     }
 
-    public static Item getItem(){
+    public static @NotNull
+    Item getItem(){
         Item itm = new Item();
         scan.nextLine();
         System.out.println("What item are you adding to the list?");
